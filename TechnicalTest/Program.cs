@@ -11,8 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddInfraestructureInjections(builder.Configuration);
-builder.Services.AddServiceInjections(builder.Configuration);
 builder.Services.AddSqlServerConnection(builder.Configuration);
+builder.Services.AddServiceInjections(builder.Configuration);
+
 builder.Services.AddHostedService<StartTest>();
 
 var app = builder.Build();

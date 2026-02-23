@@ -14,7 +14,7 @@ namespace TechnicalTest.Infraestructure.Persistence
             entity.Property(e => e.Id).ValueGeneratedOnAdd(); //autoincrementable
 
             entity.Property(e => e.Name).IsRequired().HasMaxLength(150);
-            entity.Property(e => e.Description).HasMaxLength(250);
+            entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.Departments);
         }
     }

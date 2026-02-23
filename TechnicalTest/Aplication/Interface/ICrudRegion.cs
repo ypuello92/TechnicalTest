@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TechnicalTest.Aplication.DTO_s;
 using TechnicalTest.Domain.Entities;
 
 namespace TechnicalTest.Aplication.Interface
