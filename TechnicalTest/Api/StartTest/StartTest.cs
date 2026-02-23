@@ -36,11 +36,14 @@ namespace TechnicalTest.Api.StartTest
                 var sortBy = "";
                 var sortDirection = "";
 
+                //consume endpoint /api/v1/Region
+                _logger.LogInformation("consumiendo endpoint /api/v1/Region");
                 var listRegion = await client.GetRegionListAsync(sortBy, sortDirection, ct);
                 //_logger.LogInformation("resultado api {count}", listRegion.Count);
 
-                
+
                 //crea todos los registros obtenidos en la bd
+                _logger.LogInformation("Creando en DB los registros encontrados...");
                 foreach (var item in listRegion) 
                 {
                     
@@ -70,10 +73,16 @@ namespace TechnicalTest.Api.StartTest
                         await service.UpdateAsync(existsId.Id, updateDto, ct);
                         _logger.LogInformation("Registro actualizado en BD: {id} {name}", item.Id, item.Name);
 
+                        
+
                     }
                 }
 
+
+                //consume endpoint /api/v1/Region/{id}
+                _logger.LogInformation("consumiendo endpoint /api/v1/Region/{id}");
                 var id = 1;
+                _logger.LogInformation("id = 1");
                 var region = await client.GetRegionByIdAsync(id, ct);
                 if (region == null)
                 {
@@ -81,8 +90,17 @@ namespace TechnicalTest.Api.StartTest
                 }
                 else
                 {
-                    _logger.LogInformation("Registro encontrado: {id} {name}", region.Id, region.Name);
+                    _logger.LogInformation("Respuesta Servicio: {id} {name}", region.Id, region.Name);
                 }
+
+                //lista todos los endpoints de la base de datos 
+                _logger.LogInformation("Listando registros creados en DB sql server");
+                var recordList  = await service.GetAllAsync(ct);
+                foreach (var record in recordList)
+                {
+                    _logger.LogInformation("id: {id}, Id Servicio: {servicio}, nombre: {name}",record.Id, record.RecordId, record.Name);
+                }
+
             }
             catch (Exception ex) 
             {

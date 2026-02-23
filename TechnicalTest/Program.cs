@@ -1,11 +1,21 @@
 using TechnicalTest.Infraestructure.DependencyInjection;
 using TechnicalTest.Aplication.DependencyInjectionserv;
 using TechnicalTest.Api.StartTest;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//serilog
+builder.Host.UseSerilog((context, services, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext();
+});
 
+Log.Information("iniciando...");
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
